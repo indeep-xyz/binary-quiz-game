@@ -4,7 +4,6 @@ import 'package:binary_quiz_game/resource/value_object/score.dart';
 
 import 'answer_result_entity.dart';
 
-
 /// 回答履歴
 class AnswerResultHistory {
   /// 履歴
@@ -26,5 +25,14 @@ class AnswerResultHistory {
   /// 不正解数
   Score get incorrectCount {
     return Score(_list.where((ar) => !ar.isCorrect).length);
+  }
+
+  /// 最後の回答が正解か否か
+  bool isLastAnswerCorrect(DecimalAnswer answer) {
+    var matchedAnswerResults = _list.where((ar) => ar.isMatched(answer));
+
+    return matchedAnswerResults.isEmpty
+        ? false
+        : matchedAnswerResults.last.isCorrect;
   }
 }

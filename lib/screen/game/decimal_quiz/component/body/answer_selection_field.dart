@@ -13,27 +13,11 @@ class AnswerSelectionField extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  /// 回答[DecimalAnswerSelectionItem]一覧の生成
-  List<Widget> _generateSelectionItems(int length) {
-    return List<Widget>.generate(
-      length,
-      _generateSelectionItem,
-    );
-  }
-
-  /// 回答[DecimalAnswerSelectionItem]の生成
-  Widget _generateSelectionItem(int decimalValue) {
-    return AnswerSelectionItem(
-      answer: DecimalAnswer(decimalValue),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Selector<QuizNotifier, BinaryDigit>(
         selector: (_, notifier) => notifier.binaryDigit,
         shouldRebuild: (old, current) => old.digit != current.digit,
-
         builder: (_, binaryDigit, child) {
           return Expanded(
             child: GridView.count(
@@ -41,11 +25,19 @@ class AnswerSelectionField extends StatelessWidget {
               crossAxisSpacing: 5.0,
               mainAxisSpacing: 5.0,
               scrollDirection: Axis.vertical,
-
               children: _generateSelectionItems(binaryDigit.binaryPatternCount),
             ),
           );
-        }
-    );
+        });
   }
+
+  /// 回答[DecimalAnswerSelectionItem]一覧の生成
+  List<Widget> _generateSelectionItems(int length) =>
+      List<Widget>.generate(length, _generateSelectionItem);
+
+  /// 回答[DecimalAnswerSelectionItem]の生成
+  Widget _generateSelectionItem(int decimalValue) =>
+      AnswerSelectionItem(
+        answer: DecimalAnswer(decimalValue),
+      );
 }
