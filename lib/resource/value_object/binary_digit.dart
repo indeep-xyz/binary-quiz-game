@@ -7,12 +7,16 @@ class BinaryDigit {
   final int digit;
 
   /// [digit] に応じた2進数のパターン数
-  late int binaryPatternCount = pow(2, digit).toInt();
+  late int _binaryPatternCount;
+  int get binaryPatternCount => _binaryPatternCount;
 
   /// [digit] に応じた10進数の最大値
-  late int maxDecimalNumber = binaryPatternCount - 1;
-
+  late int _maxDecimalNumber = binaryPatternCount - 1;
+  int get maxDecimalNumber => _maxDecimalNumber;
 
   /// コンストラクタ
-  BinaryDigit(this.digit);
+  BinaryDigit(this.digit){
+    _binaryPatternCount = pow(2, digit).toInt();
+    _maxDecimalNumber= binaryPatternCount - 1;
+  }
 }

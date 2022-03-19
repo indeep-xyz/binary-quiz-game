@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'question_indicator.dart';
+import 'remaining_time_indicator.dart';
 import 'score_indicator.dart';
 
 /// ゲーム画面中のヘッダ
@@ -19,6 +20,7 @@ class HeaderContainer extends StatelessWidget {
       children: const [
         QuestionIndicator(),
         ScoreIndicator(),
+        RemainingTimeIndicator(),
       ],
     );
   }
