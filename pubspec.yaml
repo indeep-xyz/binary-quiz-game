@@ -89,3 +89,11 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+  fonts:
+    - family: Bungee
+      fonts:
+        - asset: asset/font/Bungee/Bungee-Regular.ttf
+    - family: Inconsolata
+      fonts:
+        - asset: asset/font/Inconsolata/Inconsolata-Regular.ttf

@@ -16,12 +16,29 @@ class HeaderContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: 配置のバランスを整える (問題中央、スコア右端)
 
-    return Row(
-      children: const [
-        QuestionIndicator(),
-        ScoreIndicator(),
-        RemainingTimeIndicator(),
+    return Stack(
+    children: [
+      Container(
+        color: Colors.grey[300],
+        width: double.infinity,
+        height: 100,
+      ),
+      Column(
+      children: [
+        const RemainingTimeIndicator(),
+        Row(
+          children: const [
+            Expanded(
+              flex: 8,
+              child: QuestionIndicator(),
+            ),
+            Expanded(
+              flex: 1,
+              child: ScoreIndicator(),
+            ),
+          ],
+        )
       ],
-    );
+    )]);
   }
 }

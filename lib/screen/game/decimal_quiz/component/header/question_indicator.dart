@@ -6,6 +6,14 @@ import '../../provider/quiz_notifier.dart';
 /// クイズとなる値の表示部品
 class QuestionIndicator extends StatelessWidget {
 
+  /// 共通のスタイル設定[TextStyle]
+  static const TextStyle _commonTextStyle = TextStyle(
+    color: Colors.red,
+    fontFamily: 'Inconsolata',
+    fontSize: 48,
+    letterSpacing: 1,
+  );
+
   /// コンストラクタ
   const QuestionIndicator({
     Key? key,
@@ -19,15 +27,23 @@ class QuestionIndicator extends StatelessWidget {
         builder: (_, notifier, child) {
           return Container(
             padding: const EdgeInsets.only(
-              top: 20.0,
-              bottom: 20.0,
+              top: 10.0,
+              left: 10.0,
+              bottom: 10.0,
             ),
-            child: Text(
-              notifier.correctAnswerAsBinary + "_" +
-                  notifier.correctAnswerAsDecimal.toString(),
-              style: const TextStyle(fontSize: 48, color: Colors.red),
-            ),
+            child: _buildQuestion(notifier),
           );
         });
   }
+
+  Widget _buildQuestion(QuizNotifier notifier){
+    return Text(
+      notifier.correctAnswerAsBinary + "_" +
+          notifier.correctAnswerAsDecimal.toString(),
+      style: _commonTextStyle,
+      textAlign: TextAlign.left,
+
+    );
+  }
+
 }

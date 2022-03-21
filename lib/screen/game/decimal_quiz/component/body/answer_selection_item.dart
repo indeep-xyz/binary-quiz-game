@@ -28,7 +28,10 @@ class AnswerSelectionItem extends StatelessWidget {
           notifier.answer(answer);
         },
         text: answer.value.toString(),
-        textStyle: const TextStyle(fontSize: 48),
+        textStyle: const TextStyle(
+            fontFamily: 'Bungee',
+            fontSize: 48,
+        ),
       );
     });
   }
