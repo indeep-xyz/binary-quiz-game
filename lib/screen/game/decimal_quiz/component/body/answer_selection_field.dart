@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:binary_quiz_game/resource/value_object/binary_digit.dart';
+import 'package:binary_quiz_game/resource/value_object/numeric/binary_question_digit.dart';
 import 'package:binary_quiz_game/resource/value_object/decimal_answer.dart';
 
 import '../../provider/quiz_notifier.dart';
@@ -15,13 +15,13 @@ class AnswerSelectionField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<QuizNotifier, BinaryDigit>(
-        selector: (_, notifier) => notifier.binaryDigit,
-        shouldRebuild: (old, current) => old.digit != current.digit,
+    return Selector<QuizNotifier, BinaryQuestionDigit>(
+        selector: (_, notifier) => notifier.binaryQuestionDigit,
+        shouldRebuild: (old, current) => old.value != current.value,
         builder: (_, binaryDigit, child) {
           return Expanded(
             child: GridView.count(
-              crossAxisCount: binaryDigit.digit,
+              crossAxisCount: binaryDigit.digitNumber,
               crossAxisSpacing: 5.0,
               mainAxisSpacing: 5.0,
               scrollDirection: Axis.vertical,

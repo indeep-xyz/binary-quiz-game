@@ -27,25 +27,20 @@ class TimeElapsingEntity {
 //#region constructor
 
   /// コンストラクタ
-  TimeElapsingEntity(
-      {required RemainingTime remainingTime,
-      required ElapsedTime elapsedTime}) {
-    _remainingTime = RemainingTime(remainingTime.value);
-    _elapsedTime = ElapsedTime(elapsedTime.value);
-  }
+  TimeElapsingEntity({required RemainingTime remainingTime, required ElapsedTime elapsedTime})
+      : _remainingTime = RemainingTime(remainingTime.value),
+        _elapsedTime = ElapsedTime(elapsedTime.value);
 
-  /// コンストラクタ
-  TimeElapsingEntity.first(Duration remainingTime) {
-    _remainingTime = RemainingTime(remainingTime);
-    _elapsedTime = ElapsedTime.zero();
-  }
+  /// コンストラクタ (経過の起点がない状態)
+  TimeElapsingEntity.first(Duration remainingTime)
+      : _remainingTime = RemainingTime(remainingTime),
+        _elapsedTime = ElapsedTime.zero();
 
 //#endregion constructor
 //#region clone
 
   /// クローン
-  TimeElapsingEntity clone() => TimeElapsingEntity(
-      remainingTime: _remainingTime, elapsedTime: _elapsedTime);
+  TimeElapsingEntity clone() => TimeElapsingEntity(remainingTime: _remainingTime, elapsedTime: _elapsedTime);
 
 //#endregion clone
 //#region update time field

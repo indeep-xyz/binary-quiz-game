@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:binary_quiz_game/resource/constant/binary_digit_pattern.dart';
 import 'package:binary_quiz_game/resource/service/time_elapsing_service.dart';
-import 'package:binary_quiz_game/resource/value_object/binary_digit.dart';
+import 'package:binary_quiz_game/resource/value_object/numeric/binary_question_digit.dart';
 import 'package:binary_quiz_game/resource/value_object/decimal_answer.dart';
 import 'package:binary_quiz_game/resource/value_object/quiz_judgement.dart';
 import 'package:binary_quiz_game/resource/value_object/score.dart';
@@ -28,7 +28,7 @@ class QuizNotifier extends ChangeNotifier {
   final AnswerResultHistory _history = AnswerResultHistory();
 
   /// ゲームの問題として扱う2進数の桁数
-  final BinaryDigit binaryDigit = BinaryDigit(BinaryDigitPattern.four.digit);
+  final BinaryQuestionDigit binaryQuestionDigit = BinaryQuestionDigit(BinaryDigitPattern.four.digit);
 
   /// 出題中の問題
   late QuestionEntity _currentQuestion;
@@ -90,28 +90,27 @@ class QuizNotifier extends ChangeNotifier {
 
   /// 問題の更新
   void _nextQuestion() {
-    _currentQuestion = QuestionEntity.random(binaryDigit);
+    _currentQuestion = QuestionEntity.random(binaryQuestionDigit);
   }
 
   /// 回答履歴の追加
   void _addHistory(DecimalAnswer answer) {
-    if (_currentQuestion.isCorrect(answer)) {
+    // 回答履歴の追加
+    _history.add(answer, QuizJudgement(_currentQuestion.isCorrect(answer)));
+
+    if (_history.isLastAnswerCorrect()) {
       // 正解
 
-      // 回答履歴の追加と、次の問題の準備
-      _history.add(answer, QuizJudgement(true));
+      // 次の問題の準備
       _nextQuestion();
 
       // 残り時間の回復
-      if(_timeElapsingService.timeElapsingEntity.hasRemainingTime) {
+      if (_timeElapsingService.timeElapsingEntity.hasRemainingTime) {
         _timeElapsingService.increaseRemainingTime(_recoverRemainingTime);
       }
-
     } else {
       // 不正解
 
-      // 回答履歴の追加
-      _history.add(answer, QuizJudgement(false));
     }
   }
 
@@ -120,12 +119,12 @@ class QuizNotifier extends ChangeNotifier {
     _addHistory(answer);
     notifyListeners();
   }
+
   /// 回答確認
   bool isCorrectAnswer(DecimalAnswer answer) => _currentQuestion.isCorrect(answer);
 
   /// 最後の回答が正解か否か
-  bool isLastAnswerCorrect(DecimalAnswer answer) =>
-      _history.isLastAnswerCorrect(answer);
+  bool isLastAnswerCorrect() => _history.isLastAnswerCorrect();
 
 //#endregion question and answer
 }

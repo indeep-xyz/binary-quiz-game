@@ -1,4 +1,6 @@
+import 'package:binary_quiz_game/resource/value_object/numeric/decimal_digit.dart';
 import 'package:binary_quiz_game/resource/value_object/score.dart';
+import 'package:binary_quiz_game/screen/game/decimal_quiz/component/header/score_indicator_font_size.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,14 +10,6 @@ import '../../provider/quiz_notifier.dart';
 class ScoreIndicator extends StatelessWidget {
   /// 本ウィジェットの縦横サイズ
   static const double _size = 60;
-
-  /// 文字の桁数に従ったフォントサイズ
-  /// TODO: DecimalDigit
-  static const Map<int, double> fontSize = {
-    1: 29,
-    2: 24,
-    3: 21,
-  };
 
   /// コンストラクタ
   const ScoreIndicator({
@@ -53,14 +47,12 @@ class ScoreIndicator extends StatelessWidget {
 
   /// 点数[Score]の描画
   Widget _buildText(Score score) {
-    var digits = score.value.toString().length;
-
     return Center(
       child: Text(
         "${score.value}",
         style: TextStyle(
           fontFamily: 'Inconsolata',
-          fontSize: fontSize[digits] ?? fontSize.values.last,
+          fontSize: ScoreIndicatorFontSize.from(score.value).toSize(),
           letterSpacing: -1,
         ),
       ),

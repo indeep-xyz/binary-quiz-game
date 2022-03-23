@@ -1,21 +1,18 @@
 import 'dart:math';
-import 'package:binary_quiz_game/resource/value_object/binary_digit.dart';
+import 'package:binary_quiz_game/resource/value_object/numeric/binary_question_digit.dart';
 import 'package:binary_quiz_game/resource/value_object/decimal_answer.dart';
-
 
 /// 2進数で問うタイプの問題のエンティティ
 class QuestionEntity {
   /// 解答値
-  late DecimalAnswer _correctAnswer;
+  final DecimalAnswer _correctAnswer;
 
   /// 2進数の桁数
-  late BinaryDigit _binaryDigit;
+  final BinaryQuestionDigit binaryQuestionDigit;
 
   /// コンストラクタ (乱数による自動生成)
-  QuestionEntity.random(BinaryDigit digit){
-    _binaryDigit = digit;
-    _correctAnswer = DecimalAnswer(Random().nextInt(_binaryDigit.maxDecimalNumber));
-  }
+  QuestionEntity.random(this.binaryQuestionDigit)
+      : _correctAnswer = DecimalAnswer(Random().nextInt(binaryQuestionDigit.maxDecimalNumber));
 
   /// 解答値
   DecimalAnswer get correctAnswer {
@@ -24,7 +21,7 @@ class QuestionEntity {
 
   /// 解答値 (2進数)
   String get correctAnswerAsBinary {
-    return _correctAnswer.asBinary(_binaryDigit.digit);
+    return _correctAnswer.asBinary(binaryQuestionDigit.digitNumber);
   }
 
   /// 解答値 (10進数)

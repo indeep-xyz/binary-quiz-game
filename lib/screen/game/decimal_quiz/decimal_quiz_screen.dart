@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'component/body/answer_selection_field.dart';
-import 'component/header/header_container.dart';
+import 'layout/header_layout.dart';
 import 'provider/quiz_notifier.dart';
 
 class DecimalQuizScreen extends StatefulWidget {
@@ -19,9 +19,6 @@ class DecimalQuizScreen extends StatefulWidget {
 
 class _State extends State<DecimalQuizScreen> {
   // TODO: クイズのエコシステムを作る
-  // TODO: StopwatchNotifier
-  // TODO: Question -> Stopwatch -> Answer
-
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +31,7 @@ class _State extends State<DecimalQuizScreen> {
         child: Column(
           children: const [
             // 問題、点数等
-            HeaderContainer(),
+            HeaderLayout(),
 
             // 回答欄
             AnswerSelectionField(),

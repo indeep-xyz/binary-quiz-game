@@ -1,10 +1,9 @@
 /// 10進数の回答を扱う値オブジェクト
 class DecimalAnswer {
-  final int _value;
-  int get value => _value;
+  final int value;
 
   /// コンストラクタ
-  DecimalAnswer(this._value);
+  DecimalAnswer(this.value);
 
   /// 等価比較
   bool equals(DecimalAnswer another){
@@ -13,6 +12,6 @@ class DecimalAnswer {
 
   /// 2進数としての値
   String asBinary(int maxDigit) {
-    return _value.toRadixString(2).padLeft(maxDigit, "0");
+    return value.toRadixString(2).padLeft(maxDigit, "0");
   }
 }

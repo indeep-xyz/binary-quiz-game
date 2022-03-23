@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'question_indicator.dart';
-import 'remaining_time_indicator.dart';
-import 'score_indicator.dart';
+import '../component/header/question_indicator.dart';
+import '../component/header/remaining_time_indicator.dart';
+import '../component/header/score_indicator.dart';
 
 /// ゲーム画面中のヘッダ
-class HeaderContainer extends StatelessWidget {
+class HeaderLayout extends StatelessWidget {
   /// コンストラクタ
-  const HeaderContainer({
+  const HeaderLayout({
     Key? key,
   }) : super(key: key);
 

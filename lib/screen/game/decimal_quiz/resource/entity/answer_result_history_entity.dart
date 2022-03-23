@@ -28,11 +28,9 @@ class AnswerResultHistory {
   }
 
   /// 最後の回答が正解か否か
-  bool isLastAnswerCorrect(DecimalAnswer answer) {
-    var matchedAnswerResults = _list.where((ar) => ar.isMatched(answer));
-
-    return matchedAnswerResults.isEmpty
+  bool isLastAnswerCorrect() {
+    return _list.isEmpty
         ? false
-        : matchedAnswerResults.last.isCorrect;
+        : _list.last.isCorrect;
   }
 }

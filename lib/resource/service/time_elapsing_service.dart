@@ -13,10 +13,10 @@ class TimeElapsingService {
 //#region field
 
   /// 残り時間を完全に失ったときに呼び出す処理
-  late Function() _callbackOnTimerEnd;
+  final Function() callbackOnTimerEnd;
 
   /// 時間経過処理の更新毎に呼び出す処理
-  late Function(Timer) _callbackOnTimerTick;
+  final Function(Timer) callbackOnTimerTick;
 
   /// 経過時間
   late TimeElapsingEntity _timeElapsingEntity;
@@ -38,14 +38,10 @@ class TimeElapsingService {
 
   /// コンストラクタ
   TimeElapsingService({
-    required Function() callbackOnTimerEnd,
-    required Function(Timer) callbackOnTimerTick,
+    required this.callbackOnTimerEnd,
+    required this.callbackOnTimerTick,
     required Duration remainingTime,
-  }) {
-    _callbackOnTimerEnd = callbackOnTimerEnd;
-    _callbackOnTimerTick = callbackOnTimerTick;
-    _timeElapsingEntity = TimeElapsingEntity.first(remainingTime);
-  }
+  }) : _timeElapsingEntity = TimeElapsingEntity.first(remainingTime);
 
 //#endregion constructor
 //#region dispose
@@ -89,11 +85,11 @@ class TimeElapsingService {
 
     if (_timeElapsingEntity.hasRemainingTime) {
       // 残り時間があるときの処理
-      _callbackOnTimerTick(timer);
+      callbackOnTimerTick(timer);
     } else {
       // 残り時間を完全に失ったときの処理
       _timer?.cancel();
-      _callbackOnTimerEnd();
+      callbackOnTimerEnd();
     }
   }
 
