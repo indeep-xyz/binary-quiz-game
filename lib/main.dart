@@ -1,4 +1,5 @@
 import 'package:binary_quiz_game/screen/game/decimal_quiz/decimal_quiz_screen.dart';
+import 'package:binary_quiz_game/screen/game/decimal_quiz_result/decimal_quiz_result_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,8 +17,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      initialRoute: "decimalQuiz/game",
       routes: {
-        "/": (context) => const DecimalQuizScreen(title: 'Decimal Quiz'),
+        "decimalQuiz/game": (context) => const DecimalQuizScreen(title: 'Decimal Quiz'),
+        "decimalQuiz/result": (context) => const DecimalQuizResultScreen(title: 'Decimal Quiz Result'),
 
         // TODO: 結果画面を作る
         // TODO: 2進数での回答モードを作る

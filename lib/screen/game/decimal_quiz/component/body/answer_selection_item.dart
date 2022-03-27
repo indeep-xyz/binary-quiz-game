@@ -17,21 +17,12 @@ class AnswerSelectionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<QuizNotifier>(builder: (_, notifier, child) {
-      var splashColor =
-          notifier.isCorrectAnswer(answer) ? Colors.white : Colors.red;
-
       return AnswerButton(
-        color: Colors.blue,
-        highlightColor: Colors.lightBlue,
-        splashColor: splashColor,
+        isCorrectAnswer: notifier.isCorrectAnswer(answer),
         onTap: () {
           notifier.answer(answer);
         },
         text: answer.value.toString(),
-        textStyle: const TextStyle(
-            fontFamily: 'Bungee',
-            fontSize: 48,
-        ),
       );
     });
   }

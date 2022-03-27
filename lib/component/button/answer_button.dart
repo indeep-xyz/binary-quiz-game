@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'button.dart';
+
 /// 回答ボタン用のコンポーネント
 class AnswerButton extends StatelessWidget {
-  /// 背景色
-  final Color color;
-
-  /// プレス時の背景色
-  final Color highlightColor;
+  /// ボタンが正解を扱うものか否か
+  final bool isCorrectAnswer;
 
   /// タップ時のスプラッシュアニメーションで用いる色
   final Color splashColor;
@@ -14,45 +13,30 @@ class AnswerButton extends StatelessWidget {
   /// 表示する文字列
   final String text;
 
-  /// 表示する文字列のスタイル
-  final TextStyle textStyle;
-
   /// ボタンタップ時の処理
   final Function() onTap;
 
   /// コンストラクタ
   const AnswerButton({
     Key? key,
-    required this.color,
-    required this.highlightColor,
-    required this.splashColor,
     required this.text,
-    required this.textStyle,
     required this.onTap,
-  }) : super(key: key);
+    required this.isCorrectAnswer,
+  })  : splashColor = isCorrectAnswer ? Colors.white : Colors.red,
+        super(key: key);
 
   /// ビルド
   @override
   Widget build(BuildContext context) {
-    return Material(
-        // 角丸
-        borderRadius: BorderRadius.circular(10),
-
-        // 影
-        elevation: 8,
-
-        color: color,
-        type: MaterialType.button,
-        child: InkWell(
-            highlightColor: highlightColor,
-            onTap: onTap,
-            splashColor: splashColor,
-            child: Center(
-              child: Text(
-                text,
-                style: textStyle,
-                textAlign: TextAlign.center,
-              ),
-            )));
+    return Button(
+        color: Colors.blue,
+        highlightColor: Colors.lightBlue,
+        splashColor: splashColor,
+        onTap: onTap,
+        text: text,
+        textStyle: const TextStyle(
+          fontFamily: 'Bungee',
+          fontSize: 48,
+        ));
   }
 }

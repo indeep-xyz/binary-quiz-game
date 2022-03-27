@@ -7,6 +7,8 @@ import 'package:binary_quiz_game/resource/value_object/decimal_answer.dart';
 import 'package:binary_quiz_game/resource/value_object/quiz_judgement.dart';
 import 'package:binary_quiz_game/resource/value_object/score.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
 
 import '../resource/entity/answer_result_history_entity.dart';
 import '../resource/entity/question_entity.dart';
@@ -23,6 +25,9 @@ class QuizNotifier extends ChangeNotifier {
 
 //#endregion static field
 //#region field
+
+  /// [ChangeNotifierProvider.create] 時のビルドコンテキスト
+  final BuildContext buildContext;
 
   /// 今回のゲーム中の回答履歴
   final AnswerResultHistory _history = AnswerResultHistory();
@@ -57,7 +62,8 @@ class QuizNotifier extends ChangeNotifier {
 //#endregion getter
 //#region constructor
 
-  QuizNotifier() {
+  /// コンストラクタ
+  QuizNotifier(this.buildContext) {
     _nextQuestion();
     _startTimeElapsing();
   }
@@ -78,7 +84,11 @@ class QuizNotifier extends ChangeNotifier {
   void _startTimeElapsing() {
     _timeElapsingService = TimeElapsingService(
       remainingTime: _initialRemainingTime,
-      callbackOnTimerEnd: () => notifyListeners(),
+      callbackOnTimerEnd: () {
+        // ゲームの終了
+        Navigator.pushReplacementNamed(buildContext, "decimalQuiz/result");
+        notifyListeners();
+      },
       callbackOnTimerTick: (Timer _) => notifyListeners(),
     );
 

@@ -5,6 +5,7 @@ import 'component/body/answer_selection_field.dart';
 import 'layout/header_layout.dart';
 import 'provider/quiz_notifier.dart';
 
+/// 10進数で回答するゲーム時のプレイ画面
 class DecimalQuizScreen extends StatefulWidget {
   const DecimalQuizScreen({Key? key, required this.title}) : super(key: key);
 
@@ -14,12 +15,11 @@ class DecimalQuizScreen extends StatefulWidget {
   State<DecimalQuizScreen> createState() => _State();
 }
 
-// TODO: 時間制限をつける
 // TODO: スコアを保存する
+// TODO: 正解時、影響のある値を点滅アニメーションさせる
+// TODO: 不正解時、影響のある値を点滅アニメーションさせる
 
 class _State extends State<DecimalQuizScreen> {
-  // TODO: クイズのエコシステムを作る
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +27,7 @@ class _State extends State<DecimalQuizScreen> {
         title: Text(widget.title),
       ),
       body: ChangeNotifierProvider(
-        create: (_) => QuizNotifier(),
+        create: (BuildContext context) => QuizNotifier(context),
         child: Column(
           children: const [
             // 問題、点数等
