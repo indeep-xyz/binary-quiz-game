@@ -6,4 +6,4 @@ Flutter の状態遷移の基礎を学ぶために作成。
 
 ## 開発資料
 
-- [/document/file_structure.md](ファイル構成)
+- [ファイル構成](/document/file_structure.md)
