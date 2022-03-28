@@ -1,5 +1,5 @@
-import 'package:binary_quiz_game/screen/game/decimal_quiz/decimal_quiz_screen.dart';
-import 'package:binary_quiz_game/screen/game/decimal_quiz_result/decimal_quiz_result_screen.dart';
+import 'package:binary_quiz_game/screen/quiz/decimal_quiz/widget/page/decimal_quiz_screen.dart';
+import 'package:binary_quiz_game/screen/quiz/decimal_quiz_result/widget/page/decimal_quiz_result_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
