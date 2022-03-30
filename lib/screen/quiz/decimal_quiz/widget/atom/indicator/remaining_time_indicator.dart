@@ -1,8 +1,5 @@
 import 'package:binary_quiz_game/model/value_object/duration/remaining_time.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../../model/view_model/quiz_view_model.dart';
 
 /// 現在のゲーム中の残り時間[RemainingTime]の表示部品
 class RemainingTimeIndicator extends StatelessWidget {
@@ -13,9 +10,13 @@ class RemainingTimeIndicator extends StatelessWidget {
     letterSpacing: -1,
   );
 
+  /// 残り時間
+  final RemainingTime remainingTime;
+
   /// コンストラクタ
   const RemainingTimeIndicator({
     Key? key,
+    required this.remainingTime,
   }) : super(key: key);
 
   /// 描画
@@ -23,21 +24,16 @@ class RemainingTimeIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: スコア上昇時、軽く点滅
 
-    return Selector<QuizViewModel, RemainingTime>(
-        selector: (_, notifier) => notifier.timeElapsing.timeElapsingEntity.remainingTime,
-        shouldRebuild: (old, current) => old.value != current.value,
-        builder: (_, remainingTime, child) {
-          return Container(
-            color: Colors.grey[400],
-            padding: const EdgeInsets.only(
-              top: 3.0,
-              bottom: 3.0,
-            ),
-            width: double.infinity,
-            alignment: Alignment.centerRight,
-            child: _createText(remainingTime),
-          );
-        });
+    return Container(
+      color: Colors.grey[400],
+      padding: const EdgeInsets.only(
+        top: 3.0,
+        bottom: 3.0,
+      ),
+      width: double.infinity,
+      alignment: Alignment.centerRight,
+      child: _createText(remainingTime),
+    );
   }
 
   RichText _createText(RemainingTime remainingTime) {

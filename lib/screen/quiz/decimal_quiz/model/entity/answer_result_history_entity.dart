@@ -1,6 +1,6 @@
-import 'package:binary_quiz_game/model/value_object/decimal_answer.dart';
-import 'package:binary_quiz_game/model/value_object/quiz_judgement.dart';
-import 'package:binary_quiz_game/model/value_object/score.dart';
+import 'package:binary_quiz_game/model/value_object/numeric/decimal_answer.dart';
+import 'package:binary_quiz_game/model/value_object/numeric/score.dart';
+import 'package:binary_quiz_game/model/value_object/boolean/quiz_judgement.dart';
 
 import 'answer_result_entity.dart';
 

@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:binary_quiz_game/constant/binary_digit_pattern.dart';
-import 'package:binary_quiz_game/service/time_elapsing_service.dart';
+import 'package:binary_quiz_game/service/duration/time_elapsing_service.dart';
 import 'package:binary_quiz_game/model/value_object/numeric/binary_question_digit.dart';
-import 'package:binary_quiz_game/model/value_object/decimal_answer.dart';
-import 'package:binary_quiz_game/model/value_object/quiz_judgement.dart';
-import 'package:binary_quiz_game/model/value_object/score.dart';
+import 'package:binary_quiz_game/model/value_object/numeric/decimal_answer.dart';
+import 'package:binary_quiz_game/model/value_object/numeric/score.dart';
+import 'package:binary_quiz_game/model/value_object/boolean/quiz_judgement.dart';
 import 'package:flutter/material.dart';
 
 import '../entity/answer_result_history_entity.dart';

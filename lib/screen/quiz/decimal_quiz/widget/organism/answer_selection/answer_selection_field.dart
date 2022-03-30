@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:binary_quiz_game/model/value_object/numeric/binary_question_digit.dart';
-import 'package:binary_quiz_game/model/value_object/decimal_answer.dart';
+import 'package:binary_quiz_game/model/value_object/numeric/decimal_answer.dart';
 
 import '../../../model/view_model/quiz_view_model.dart';
 import 'answer_selection_item.dart';

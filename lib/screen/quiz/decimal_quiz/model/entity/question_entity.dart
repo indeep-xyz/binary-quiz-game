@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:binary_quiz_game/model/value_object/numeric/binary_question_digit.dart';
-import 'package:binary_quiz_game/model/value_object/decimal_answer.dart';
+import 'package:binary_quiz_game/model/value_object/numeric/decimal_answer.dart';
 
 /// 2進数で問うタイプの問題のエンティティ
 class QuestionEntity {
