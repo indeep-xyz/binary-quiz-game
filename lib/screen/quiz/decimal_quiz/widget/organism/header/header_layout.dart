@@ -1,3 +1,4 @@
+import 'package:binary_quiz_game/widget/atom/animation/animated_blink.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,7 +40,15 @@ class HeaderLayout extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 1,
-                  child: ScoreIndicator(score: notifier.correctCount),
+                  child: AnimatedBlink(
+                    duration: const Duration(milliseconds: 300),
+                    initialColor: Colors.yellow,
+                    blinkColor: Colors.orange[400],
+                    builder: (_, color, blink) {
+                      notifier.addCorrectFunction(blink);
+                      return ScoreIndicator(score: notifier.correctCount, backgroundColor:color);
+                    },
+                  ),
                 ),
               ],
             )

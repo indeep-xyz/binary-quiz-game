@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:binary_quiz_game/constant/binary_digit_pattern.dart';
+import 'package:binary_quiz_game/model/value_object/function/bulk_function.dart';
 import 'package:binary_quiz_game/service/duration/time_elapsing_service.dart';
 import 'package:binary_quiz_game/model/value_object/numeric/binary_question_digit.dart';
 import 'package:binary_quiz_game/model/value_object/numeric/decimal_answer.dart';
@@ -39,6 +40,9 @@ class QuizViewModel extends ChangeNotifier {
   /// 時間経過を扱うエンティティ
   late TimeElapsingService _timeElapsingService;
 
+  /// 正解時に実行する処理群
+  final BulkFunction _correctFunctions;
+
 //#endregion field
 //#region getter
 
@@ -61,7 +65,7 @@ class QuizViewModel extends ChangeNotifier {
 //#region constructor
 
   /// コンストラクタ
-  QuizViewModel(this.buildContext) {
+  QuizViewModel(this.buildContext) : _correctFunctions = BulkFunction() {
     _nextQuestion();
     _startTimeElapsing();
   }
@@ -76,6 +80,14 @@ class QuizViewModel extends ChangeNotifier {
   }
 
 //#endregion dispose
+//#region set function
+
+  /// 正解時処理の追加
+  void addCorrectFunction(Function() func) {
+    _correctFunctions.add(func);
+  }
+
+//#endregion set function
 //#region timer
 
   /// 時間経過処理の開始
@@ -116,6 +128,9 @@ class QuizViewModel extends ChangeNotifier {
       if (_timeElapsingService.timeElapsingEntity.hasRemainingTime) {
         _timeElapsingService.increaseRemainingTime(_recoverRemainingTime);
       }
+
+      // 正解時に実行する処理群の呼び出し
+      _correctFunctions.runAll();
     } else {
       // 不正解
 

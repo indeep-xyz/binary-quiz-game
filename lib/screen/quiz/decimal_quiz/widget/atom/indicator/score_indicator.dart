@@ -16,20 +16,23 @@ class ScoreIndicator extends StatelessWidget {
   /// 表示するスコア[Score]
   final Score score;
 
+  /// フォントサイズの調整処理
   final SuitableFontSize fontSize;
+
+  /// 背景色
+  final Color? backgroundColor;
 
   /// コンストラクタ
   ScoreIndicator({
     Key? key,
     required this.score,
+    required this.backgroundColor,
   })  : fontSize = SuitableFontSize(_fontFamily, _fontBaseSize),
         super(key: key);
 
   /// 描画
   @override
   Widget build(BuildContext context) {
-    // TODO: スコア上昇時、軽く点滅
-
     return Container(
         width: _size,
         height: _size,
@@ -45,8 +48,11 @@ class ScoreIndicator extends StatelessWidget {
   /// 点数[Score]の背景の描画
   Widget _buildBackground() {
     return Container(
-      decoration: const BoxDecoration(
-          shape: BoxShape.circle, boxShadow: [BoxShadow(blurRadius: 2, color: Colors.grey)], color: Colors.yellow),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          boxShadow: const [BoxShadow(blurRadius: 2, color: Colors.grey)],
+          color: backgroundColor),
     );
   }
 
