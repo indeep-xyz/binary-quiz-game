@@ -134,7 +134,7 @@ class _State extends State<AnimatedBlink> with SingleTickerProviderStateMixin {
 
     // 初回描画時の点滅を避ける場合
     // 依存値が空欄の場合を初回描画時とし、その状況の場合のみ点滅を行わない
-    return widget.dependencies.isNotEmpty;
+    return lastDependencies.isNotEmpty;
   }
 
 //#endregion build
