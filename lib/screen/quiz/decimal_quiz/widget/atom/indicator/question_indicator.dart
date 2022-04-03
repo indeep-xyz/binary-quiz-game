@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+// TODO: FlipCardにて出すようにする
+// TODO: 問題変更時、FlipCardを回すようにする
+// TODO: 問題変更時、背景を少し色づける (同一問題が続いたとき用)
+
 /// クイズとなる値の表示部品
 class QuestionIndicator extends StatelessWidget {
   /// 共通のスタイル設定[TextStyle]

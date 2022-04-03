@@ -15,9 +15,10 @@ class DecimalQuizScreen extends StatefulWidget {
   State<DecimalQuizScreen> createState() => _State();
 }
 
-// TODO: スコアを保存する
-// TODO: 正解時、影響のある値を点滅アニメーションさせる
-// TODO: 不正解時、影響のある値を点滅アニメーションさせる
+// TODO: ゲームモードの選択画面に戻るための処理を追加する (2度戻るボタンタップで、右上に×ボタン追加、等)
+// TODO: バックグラウンドから戻ってきた場合、秒数経過 or 問題変更する
+// TODO: Scaffold.child下をlayout内に突っ込む
+// TODO: 回答手段をテンキー風にする
 
 class _State extends State<DecimalQuizScreen> {
   @override

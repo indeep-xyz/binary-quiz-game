@@ -12,6 +12,9 @@ class DecimalQuizResultScreen extends StatefulWidget {
 }
 
 // TODO: スコアを受け取って表示する
+// TODO: スコアを保存する
+// TODO: ゲームモードの選択画面に戻るためのボタンを追加する
+// TODO: Retryボタンをフローティング化する
 
 class _State extends State<DecimalQuizResultScreen> {
   @override

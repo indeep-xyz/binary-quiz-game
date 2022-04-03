@@ -6,6 +6,13 @@ void main() {
   runApp(const MyApp());
 }
 
+// TODO: ゲームモードの追加 (2進数による回答…FlipCardによる値の実装、回答ボタンの実装)
+// TODO: ゲームモードの追加 (2進数による回答…パターン２。制限回数内の操作で正解を得ないとゲームオーバー)
+// TODO: ゲームモード選択画面の追加
+// TODO: ゲームモード選択画面の選択時、何かしらの演出をして画面遷移する
+// TODO: 音を出す (音楽)
+// TODO: 音を出す (効果音)
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
