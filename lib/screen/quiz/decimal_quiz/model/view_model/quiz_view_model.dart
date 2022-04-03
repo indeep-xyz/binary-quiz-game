@@ -40,9 +40,6 @@ class QuizViewModel extends ChangeNotifier {
   /// 時間経過を扱うエンティティ
   late TimeElapsingService _timeElapsingService;
 
-  /// 正解時に実行する処理群
-  final BulkFunction _correctFunctions;
-
 //#endregion field
 //#region getter
 
@@ -65,7 +62,7 @@ class QuizViewModel extends ChangeNotifier {
 //#region constructor
 
   /// コンストラクタ
-  QuizViewModel(this.buildContext) : _correctFunctions = BulkFunction() {
+  QuizViewModel(this.buildContext) {
     _nextQuestion();
     _startTimeElapsing();
   }
@@ -80,14 +77,6 @@ class QuizViewModel extends ChangeNotifier {
   }
 
 //#endregion dispose
-//#region set function
-
-  /// 正解時処理の追加
-  void addCorrectFunction(Function() func) {
-    _correctFunctions.add(func);
-  }
-
-//#endregion set function
 //#region timer
 
   /// 時間経過処理の開始
@@ -129,8 +118,6 @@ class QuizViewModel extends ChangeNotifier {
         _timeElapsingService.increaseRemainingTime(_recoverRemainingTime);
       }
 
-      // 正解時に実行する処理群の呼び出し
-      _correctFunctions.runAll();
     } else {
       // 不正解
 

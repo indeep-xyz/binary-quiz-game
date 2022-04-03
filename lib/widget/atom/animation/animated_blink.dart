@@ -1,10 +1,16 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 /// 点滅アニメーション[Animation]の作成
 class AnimatedBlink extends StatefulWidget {
+  /// 描画処理
+  final Widget Function(BuildContext context, Color? currentColor) builder;
 
-  /// 点滅回数
-  final int blinkCountMax;
+  /// 点滅処理の起点となる依存値
+  final List<dynamic> dependencies;
+
+  /// 初回描画時に点滅を行うか否か
+  final bool doesBlinkWhenFirstBuild;
 
   /// 点滅開始から終了までの時間[Duration]
   final Duration duration;
@@ -15,9 +21,8 @@ class AnimatedBlink extends StatefulWidget {
   /// 点滅時の色
   final Color? blinkColor;
 
-  /// 描画処理
-  /// 渡した点滅実行用の関数[blink]を外から実行し、現在の色[currentColor]を返す
-  final Widget Function(BuildContext context, Color? currentColor, Function() blink) builder;
+  /// 点滅回数
+  final int repeat;
 
   const AnimatedBlink({
     Key? key,
@@ -25,7 +30,9 @@ class AnimatedBlink extends StatefulWidget {
     required this.duration,
     required this.initialColor,
     required this.blinkColor,
-    this.blinkCountMax = 2,
+    required this.dependencies,
+    this.doesBlinkWhenFirstBuild = true,
+    this.repeat = 2,
   }) : super(key: key);
 
   @override
@@ -37,6 +44,9 @@ class _State extends State<AnimatedBlink> with SingleTickerProviderStateMixin {
 
   late AnimationController _controller;
   late Animation<Color?> _animation;
+
+  /// 直近に点滅した際の依存値
+  List<dynamic> lastDependencies = [];
 
 //#endregion field
 //#region initialize
@@ -65,7 +75,7 @@ class _State extends State<AnimatedBlink> with SingleTickerProviderStateMixin {
     _animation = TweenSequence<Color?>([
       // 点滅
       ...List.filled(
-          widget.blinkCountMax,
+          widget.repeat,
           TweenSequenceItem(
             tween: ColorTween(begin: widget.initialColor, end: widget.blinkColor),
             weight: 5,
@@ -92,13 +102,39 @@ class _State extends State<AnimatedBlink> with SingleTickerProviderStateMixin {
   /// 描画処理
   @override
   Widget build(BuildContext context) {
-    return widget.builder(context, _animation.value, blink);
+    var eq = const ListEquality();
+
+    if (!eq.equals(lastDependencies, widget.dependencies)) {
+      // 依存値[lastDependencies]の変更時のみ点滅処理
+      if (_doesBlink()) {
+        _blink();
+      }
+
+      // 依存値の更新
+      lastDependencies = widget.dependencies;
+    }
+
+    return widget.builder(context, _animation.value);
   }
 
   /// 点滅の開始処理
-  void blink() {
+  void _blink() {
     _controller.reset();
     _controller.forward();
+  }
+
+  /// 点滅の開始判定
+  /// 本メソッドは、依存値の更新判定処理後に実施するものとする
+  bool _doesBlink() {
+    if (widget.doesBlinkWhenFirstBuild){
+      // 初回描画時の点滅を避けない場合
+      // 常に点滅を行う
+      return true;
+    }
+
+    // 初回描画時の点滅を避ける場合
+    // 依存値が空欄の場合を初回描画時とし、その状況の場合のみ点滅を行わない
+    return widget.dependencies.isNotEmpty;
   }
 
 //#endregion build

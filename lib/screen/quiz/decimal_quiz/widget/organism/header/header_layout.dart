@@ -41,12 +41,13 @@ class HeaderLayout extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: AnimatedBlink(
+                    dependencies: [notifier.correctCount],
+                    doesBlinkWhenFirstBuild: false,
                     duration: const Duration(milliseconds: 300),
                     initialColor: Colors.yellow,
                     blinkColor: Colors.orange[400],
-                    builder: (_, color, blink) {
-                      notifier.addCorrectFunction(blink);
-                      return ScoreIndicator(score: notifier.correctCount, backgroundColor:color);
+                    builder: (_, color) {
+                      return ScoreIndicator(score: notifier.correctCount, backgroundColor: color);
                     },
                   ),
                 ),
