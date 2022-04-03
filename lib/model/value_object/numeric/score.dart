@@ -5,14 +5,14 @@ class Score {
   /// 点数
   final int value;
 
-//#region field
-//#endregion constructor
+//#endregion field
+//#region constructor
 
   /// コンストラクタ
   Score(this.value);
 
 //#endregion constructor
-//#region basic methods
+//#region basic method
 
   /// 文字列変換
   @override
@@ -28,7 +28,7 @@ class Score {
 
   /// 比較に用いるハッシュコード
   @override
-  int get hashCode => value.hashCode;
+  int get hashCode => super.hashCode;
 
-//#endregion basic methods
+//#endregion basic method
 }

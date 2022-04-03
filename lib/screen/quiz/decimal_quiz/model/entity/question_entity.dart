@@ -21,7 +21,7 @@ class QuestionEntity {
 
   /// 解答値 (2進数)
   String get correctAnswerAsBinary {
-    return _correctAnswer.asBinary(binaryQuestionDigit.digitNumber);
+    return _correctAnswer.asBinary(binaryQuestionDigit.value);
   }
 
   /// 解答値 (10進数)
